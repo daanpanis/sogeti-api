@@ -1,0 +1,36 @@
+{
+  "name": "sogeti-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc && npm run postinstall && node ./bin/www",
+    "postinstall": "rm -rf node_modules/{type-graphql}/node_modules/{@types/graphql,graphql}"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.5.0",
+    "body-parser": "^1.19.0",
+    "class-validator": "^0.9.1",
+    "cookie-parser": "^1.4.4",
+    "error-handler": "^1.0.0",
+    "express": "^4.16.4",
+    "express-graphql": "^0.8.0",
+    "express-jwt": "^5.3.1",
+    "graphql": "^14.3.0",
+    "method-override": "^3.0.0",
+    "reflect-metadata": "^0.1.13",
+    "type-graphql": "^0.17.3"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.1",
+    "@types/errorhandler": "0.0.32",
+    "@types/express": "^4.16.1",
+    "@types/express-graphql": "^0.8.0",
+    "@types/graphql": "^14.2.0",
+    "@types/method-override": "0.0.31",
+    "typescript": "^3.4.5"
+  }
+}
