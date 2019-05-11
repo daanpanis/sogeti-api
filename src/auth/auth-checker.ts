@@ -1,6 +1,8 @@
 import {AuthChecker} from "type-graphql";
 import {Context} from "./context";
-import {Service} from "typedi";
+import {Container, Service} from "typedi";
+import {UserService} from "../services/user.service";
+import {Role} from "./role";
 
 @Service()
 export class CustomAuthChecker {
@@ -14,12 +16,9 @@ export class CustomAuthChecker {
             return false;
         }
 
-        /*  const query = this.userRoles.createQueryBuilder()
-              .where('userId = :userId', {userId: context.user.uid})
-              .andHaving('pharmacyId = :pharmacyId', {pharmacyId: context.pharmacyId});
-          const role = await query.getOne();
-          return !!(role && roles.find(value => value.toLocaleLowerCase() === role.role.toLocaleLowerCase()));*/
-        return true;
+        const userService = Container.get(UserService);
+        const userRole = await userService.getRoleById(context.user.uid);
+        return roles.some(role => userRole === role as Role);
     };
 
     constructor() {
