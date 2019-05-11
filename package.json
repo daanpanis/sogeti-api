@@ -19,10 +19,12 @@
     "express": "^4.16.4",
     "express-graphql": "^0.8.0",
     "express-jwt": "^5.3.1",
+    "firebase-admin": "^7.3.0",
     "graphql": "^14.3.0",
     "method-override": "^3.0.0",
     "reflect-metadata": "^0.1.13",
-    "type-graphql": "^0.17.3"
+    "type-graphql": "^0.17.3",
+    "typedi": "^0.8.0"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.1",
