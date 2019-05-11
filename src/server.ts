@@ -4,6 +4,7 @@ import {ApolloServer} from "apollo-server";
 import {Container} from "typedi";
 import {Context} from "./auth/context";
 import {CustomAuthChecker} from "./auth/auth-checker";
+import {DeclarationService} from "./services/declaration.service";
 import admin = require("firebase-admin");
 
 export async function bootstrap(port) {
