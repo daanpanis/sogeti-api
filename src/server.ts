@@ -36,7 +36,6 @@ export async function bootstrap(port) {
                             aud: verified.aud,
                             uid: verified.uid
                         },
-                        pharmacyId: (req.headers.pharmacyid ? req.headers.pharmacyid : req.headers.pharmacyId)
                     } as Context;
                 } catch (ex) {
                     console.log(ex);
