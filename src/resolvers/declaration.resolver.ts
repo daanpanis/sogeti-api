@@ -7,6 +7,7 @@ import {CategoryService} from "../services/category.service";
 import {UserService} from "../services/user.service";
 import {StatusUpdateService} from "../services/status-update.service";
 import {Context} from "../auth/context";
+import {DeclarationArgs} from "../args/declaration.args";
 
 @Resolver(() => Declaration)
 export class DeclarationResolver {
@@ -22,11 +23,35 @@ export class DeclarationResolver {
         return Container.get(DeclarationService).getDeclarationById(id);
     }
 
+    @Authorized(Role.UNIT_MANAGER, Role.INDIA_GUY)
+    @Query(() => [Declaration])
+    async allDeclarations() {
+        return Container.get(DeclarationService).getAllDeclarations();
+    }
+
     @Authorized(Role.EMPLOYEE)
     @Mutation(() => String, {nullable: true})
-    async createDeclaration(): Promise<string | null> {
-        // TODO;
-        return null;
+    async createDeclaration(@Arg("args") args: DeclarationArgs, @Ctx() {user}: Context): Promise<string> {
+        console.log(args);
+        const copy: DeclarationArgs = {
+            userId: user.uid,
+            bankAccount: args.bankAccount,
+            amount: args.amount,
+            description: args.description,
+            categoryId: args.categoryId,
+            chargeCustomer: args.chargeCustomer,
+            inForeignCountry: args.inForeignCountry,
+            date: args.date,
+            currency: args.currency,
+            parkingInfo: args.parkingInfo,
+            hotelInfo: args.hotelInfo
+        };
+        if (!copy.hotelInfo) {
+            (copy as any).hotelInfo = null;
+        }
+        const id = await Container.get(DeclarationService).addDeclaration(copy);
+        await Container.get(StatusUpdateService).addUpdateForDeclarationId(id, 1, user.uid, null);
+        return id;
     }
 
     @FieldResolver()

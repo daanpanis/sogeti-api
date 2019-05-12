@@ -1,10 +1,11 @@
-import {Field, ID, ObjectType} from "type-graphql";
+import {ArgsType, Field, ID, ObjectType} from "type-graphql";
 import {ParkingInfo} from "./parking-info";
 import {HotelInfo} from "./hotel-info";
 import {Category} from "./category";
 import {User} from "./user";
 import {StatusUpdate} from "./status-update";
 
+@ArgsType()
 @ObjectType()
 export class Declaration {
     @Field(() => ID)
@@ -48,6 +49,9 @@ export class Declaration {
 
     @Field()
     status!: number;
+
+    @Field()
+    bankAccount!: string;
 
     @Field(() => [StatusUpdate])
     statusUpdates!: StatusUpdate[];

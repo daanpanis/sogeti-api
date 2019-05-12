@@ -1,5 +1,6 @@
-import {Field, ID, ObjectType} from "type-graphql";
+import {Field, ID, InputType, ObjectType} from "type-graphql";
 
+@InputType("HotelInfoArgs")
 @ObjectType()
 export class HotelInfo {
     @Field(() => ID)
