@@ -53,10 +53,11 @@ export async function bootstrap(port) {
 }
 
 function setupFirebase() {
+    // if (process.env.SOGETI_GOOGLE_CREDENTIALS) {
     if (true) {
         const credentialsPath = process.env.SOGETI_GOOGLE_CREDENTIALS;
+        // const credentials = require(credentialsPath);
         const credentials = require("/home/rubenxvde/declaratieproject-firebase-adminsdk-et86q-0634cc0bb6.json");
-        console.log(credentials);
         Container.set("firebase-app", admin.initializeApp({
             credential: admin.credential.cert({
                 projectId: credentials.project_id,
