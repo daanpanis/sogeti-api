@@ -6,6 +6,7 @@ import {Context} from "./auth/context";
 import {CustomAuthChecker} from "./auth/auth-checker";
 import {DeclarationService} from "./services/declaration.service";
 import admin = require("firebase-admin");
+import {StatusUpdateService} from "./services/status-update.service";
 
 export async function bootstrap(port) {
     setupFirebase();

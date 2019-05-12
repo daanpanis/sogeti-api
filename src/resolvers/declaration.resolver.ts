@@ -1,4 +1,4 @@
-import {Arg, Authorized, Ctx, FieldResolver, Query, Resolver, Root} from "type-graphql";
+import {Arg, Authorized, Ctx, FieldResolver, Mutation, Query, Resolver, Root} from "type-graphql";
 import {Role} from "../auth/role";
 import {Container} from "typedi";
 import {Declaration} from "../entities/declaration";
@@ -20,6 +20,13 @@ export class DeclarationResolver {
     @Query(() => Declaration)
     async declaration(@Arg("id") id: string): Promise<Declaration> {
         return Container.get(DeclarationService).getDeclarationById(id);
+    }
+
+    @Authorized(Role.EMPLOYEE)
+    @Mutation(() => String, {nullable: true})
+    async createDeclaration(): Promise<string | null> {
+        // TODO;
+        return null;
     }
 
     @FieldResolver()

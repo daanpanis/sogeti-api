@@ -23,6 +23,12 @@ export class Declaration {
     amount!: number;
 
     @Field()
+    inForeignCountry!: boolean;
+
+    @Field()
+    chargeCustomer!: boolean;
+
+    @Field()
     currency!: string;
 
     @Field()

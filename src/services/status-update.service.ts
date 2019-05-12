@@ -9,7 +9,7 @@ export class StatusUpdateService {
     db: Firestore = fireAdmin.firestore();
 
     public async getUpdatesForDeclarationId(declarationId: string): Promise<StatusUpdate[]> {
-        const snapshot = await this.db.collection('declarations').doc(declarationId).collection('statusUpdates').get();
+        const snapshot = await this.db.collection('declarations').doc(declarationId).collection('statusUpdates').orderBy("date", 'desc').get();
         return snapshot.docs.map(doc => {
             const data = doc.data() as StatusUpdate;
             data.date = (doc.data().date as Timestamp).toMillis();
@@ -26,5 +26,15 @@ export class StatusUpdateService {
             data.id = doc.id;
             return data;
         })[0];
+    }
+
+    public async addUpdateForDeclarationId(declarationId: string, status: number, userId: string, comment: string) {
+        const data = {
+            status: status,
+            comment: comment,
+            userId: userId,
+            date: Timestamp.now()
+        };
+        await this.db.collection('declarations').doc(declarationId).collection('statusUpdates').add(data);
     }
 }
