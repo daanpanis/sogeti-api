@@ -51,7 +51,8 @@ export class DeclarationResolver {
             date: args.date,
             currency: args.currency,
             parkingInfo: args.parkingInfo,
-            hotelInfo: args.hotelInfo
+            hotelInfo: args.hotelInfo,
+            attachments: args.attachments,
         };
         if (!copy.hotelInfo) {
             (copy as any).hotelInfo = null;

@@ -27,5 +27,6 @@ export class DeclarationArgs {
     @Field(() => HotelInfo, {nullable: true})
     hotelInfo?: HotelInfo;
     userId!: string;
-
+    @Field(() => [String], {nullable: true})
+    attachments?: string[];
 }
