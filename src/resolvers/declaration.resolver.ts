@@ -29,6 +29,13 @@ export class DeclarationResolver {
         return Container.get(DeclarationService).getAllDeclarations();
     }
 
+    @Authorized(Role.UNIT_MANAGER, Role.INDIA_GUY)
+    @Mutation(() => String)
+    async updateStatus(@Arg("id") id: string, @Arg("status") status: number, @Arg('comment', {nullable: true})comment: string, @Ctx(){user}: Context) {
+        await Container.get(StatusUpdateService).addUpdateForDeclarationId(id, status, user.uid, comment);
+        return '';
+    }
+
     @Authorized(Role.EMPLOYEE)
     @Mutation(() => String, {nullable: true})
     async createDeclaration(@Arg("args") args: DeclarationArgs, @Ctx() {user}: Context): Promise<string> {
@@ -51,6 +58,7 @@ export class DeclarationResolver {
         }
         const id = await Container.get(DeclarationService).addDeclaration(copy);
         await Container.get(StatusUpdateService).addUpdateForDeclarationId(id, 1, user.uid, null);
+        await Container.get(StatusUpdateService).addUpdateForDeclarationId(id, 2, user.uid, null);
         return id;
     }
 

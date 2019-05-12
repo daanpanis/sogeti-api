@@ -55,4 +55,7 @@ export class Declaration {
 
     @Field(() => [StatusUpdate])
     statusUpdates!: StatusUpdate[];
+
+    @Field(() => [String], {nullable: true})
+    attachments?: string[];
 }

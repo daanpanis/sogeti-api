@@ -31,7 +31,7 @@ export class StatusUpdateService {
     public async addUpdateForDeclarationId(declarationId: string, status: number, userId: string, comment: string | null) {
         const data = {
             status: status,
-            comment: comment,
+            comment: comment || null,
             userId: userId,
             date: Timestamp.now()
         };
