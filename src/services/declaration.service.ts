@@ -17,4 +17,14 @@ export class DeclarationService {
             return data;
         });
     }
+
+    public async getDeclarationById(id: string): Promise<Declaration> {
+        const snapshot = await this.db.collection('declarations').doc(id).get();
+        const data = snapshot.data() as Declaration;
+        // @ts-ignore
+        const {date} = snapshot.data();
+        data.date = (date as Timestamp).toMillis();
+        data.id = snapshot.id;
+        return data;
+    }
 }

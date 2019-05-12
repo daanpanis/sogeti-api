@@ -3,6 +3,7 @@ import {ParkingInfo} from "./parking-info";
 import {HotelInfo} from "./hotel-info";
 import {Category} from "./category";
 import {User} from "./user";
+import {StatusUpdate} from "./status-update";
 
 @ObjectType()
 export class Declaration {
@@ -38,4 +39,10 @@ export class Declaration {
 
     @Field()
     userId!: string;
+
+    @Field()
+    status!: number;
+
+    @Field(() => [StatusUpdate])
+    statusUpdates!: StatusUpdate[];
 }
