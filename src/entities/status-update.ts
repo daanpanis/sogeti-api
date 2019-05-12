@@ -1,4 +1,5 @@
 import {Field, ID, ObjectType} from "type-graphql";
+import {User} from "./user";
 
 @ObjectType()
 export class StatusUpdate {
@@ -13,4 +14,10 @@ export class StatusUpdate {
 
     @Field()
     status!: number;
+
+    @Field(() => User)
+    user!: User;
+
+    @Field()
+    userId!: string;
 }
